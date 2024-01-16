@@ -1,0 +1,76 @@
+{
+    "7twelve portfolio": [
+        {
+        "name": "vanguard_large_cap_etf",
+        "ticker": "VV",
+        "allocation": 8.33,
+        "type": "us_equities"
+        },
+        {
+        "name": "ishares_core_sp_mid_cap_etf",
+        "ticker": "IJH",
+        "allocation": 8.33,
+        "type": "us_equities"
+        },
+        {
+        "name": "ishares_core_sp_small_cap_etf",
+        "ticker": "IJR",
+        "allocation": 8.33,
+        "type": "us_equities"
+        },
+        {
+        "name": "ishares_msci_eafe_etf",
+        "ticker": "EFA",
+        "allocation": 8.33,
+        "type": "international_equities"
+        },
+        {
+        "name": "ishares_msci_emerging_markets_etf",
+        "ticker": "EEM",
+        "allocation": 8.33,
+        "type": "international_equities"
+        },
+        {
+        "name": "spdr_dow_jones_reit_etf",
+        "ticker": "RWR",
+        "allocation": 8.33,
+        "type": "real_estate"
+        },
+        {
+        "name": "powershares_db_commodity_tracking_etf",
+        "ticker": "DBC",
+        "allocation": 8.33,
+        "type": "natural_resources"
+        },
+        {
+        "name": "vanguard_materials_etf",
+        "ticker": "VAW",
+        "allocation": 8.33,
+        "type": "natural_resources"
+        },
+        {
+        "name": "ishares_core_us_aggregate_bond_etf",
+        "ticker": "AGG",
+        "allocation": 8.33,
+        "type": "us_bonds_inflation_protected"
+        },
+        {
+        "name": "ishares_tips_bond_etf",
+        "ticker": "TIP",
+        "allocation": 8.33,
+        "type": "us_bonds_inflation_protected"
+        },
+        {
+        "name": "ishares_international_treasury_bond_etf",
+        "ticker": "IGOV",
+        "allocation": 8.33,
+        "type": "international_bonds"
+        },
+        {
+        "name": "ishares_1_3_year_treasury_bond_etf",
+        "ticker": "SHY",
+        "allocation": 8.33,
+        "type": "cash"
+        },
+    ],
+}
