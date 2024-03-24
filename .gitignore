@@ -162,3 +162,12 @@ cython_debug/
 
 # db stuff
 *.db
+
+# apple
+.DS_Store
+
+# pdfs
+*.pdf
+
+# jupyter
+.idea/
