@@ -1,4 +1,6 @@
 from data.data_models import Base, StockPrice
+from data.data_utils import calculate_returns, calculate_garch, get_current
+
 from sqlalchemy import create_engine, select, insert
 from sqlalchemy.orm import Session
 
@@ -88,3 +90,16 @@ def etl_fmp():
     return
 
 
+def etl_dowaward_giordano():
+    with Session(get_engine()) as session:
+         print('querying database.. ')
+         stmt = session.query(StockPrice)
+         data = pd.read_sql(stmt.statement, con=(get_engine()))
+
+    df = get_current(data)
+    print('calculating returns..')
+    df = calculate_returns(df)
+    print('calculating garch..')
+    df = calculate_garch(df, 1, 1, 10, 'adjusted_daily_returns')
+
+    return data

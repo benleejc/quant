@@ -28,10 +28,10 @@ link: https://cmtassociation.org/wp-content/uploads/2018/05/2018_dowaward-giorda
 
 
 # TODOs
-- [/] yahoo data
+- [x] yahoo data
 - [ ] fmp data
-- [ ] replicate 7twelve
-- [ ] momentum data
+- [/] replicate 7twelve
+- [ ] momentum data - 4months daily returns
 - [ ] basic backtesting model
 - [ ] momentum
 - [ ] rankings for momentum

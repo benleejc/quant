@@ -44,4 +44,4 @@ class ModelData(Base):
     model_name = Column(String)
 
     def __repr__(self):
-        return f"<ModelData(symbol={self.ticker}, date={self.price_date}, data_souce={self.data_source})>"
+        return f"<ModelData(symbol={self.ticker}, date={self.price_date}, data_source={self.data_source})>"
