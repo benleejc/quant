@@ -11,7 +11,7 @@ def run_yf_scrape():
 
 
 def main():
-    #run_yf_scrape()
+    run_yf_scrape()
     data = etl_dowaward_giordano()
 
 

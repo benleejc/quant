@@ -1,5 +1,5 @@
 from data.data_models import Base, StockPrice
-from data.data_utils import calculate_returns, calculate_garch, get_current
+from data.data_utils import calculate_returns, calculate_garch, get_current, calculate_correlation
 
 from sqlalchemy import create_engine, select, insert
 from sqlalchemy.orm import Session
@@ -101,5 +101,7 @@ def etl_dowaward_giordano():
     df = calculate_returns(df)
     print('calculating garch..')
     df = calculate_garch(df, 1, 1, 10, 'adjusted_daily_returns')
+    print('calculating correlations..')
+    df = calculate_correlation(df)
 
     return data

@@ -74,3 +74,22 @@ def calculate_garch(df, p, q, freq, return_column):
 # vol_df = pd.DataFrame(returns_data.rolling(window=10, min_periods=10).std()) # normal variance calculation
     # vol_df = pd.DataFrame(returns_data.rolling(window=10, min_periods=10).std()) # normal variance calculation
     return df.merge(vol_df, on=['price_date', 'ticker'], how='left')
+
+
+def calculate_correlation(df):
+    start_date = df.groupby(['ticker'])['price_date'].min().max()
+    working_df = df[df['price_date'] >= start_date].copy()
+    working_df['average_adjusted_daily_returns'] = working_df[['price_date', 'adjusted_daily_returns']]\
+        .groupby('price_date')['adjusted_daily_returns']\
+        .transform('mean')
+
+    correlations = working_df.set_index('price_date')\
+        .groupby('ticker')[['average_adjusted_daily_returns', 'adjusted_daily_returns']]\
+        .rolling(80, 80)\
+        .corr()\
+        .reset_index()
+    cols = ['ticker', 'price_date', 'adjusted_daily_returns']
+    correlations = correlations[correlations['level_2'] == 'average_adjusted_daily_returns'][cols]
+    correlations = correlations.rename(columns={'adjusted_daily_returns': 'correlation'})
+    working_df = working_df.merge(correlations, on=['ticker', 'price_date'])
+    return working_df
