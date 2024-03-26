@@ -13,11 +13,10 @@ def run_yf_scrape():
 def main():
     run_yf_scrape()
     data = etl_dowaward_giordano()
-
-
+    print(data.columns)
     return data
 
 
 if __name__ == '__main__':
     print(main())
-    
+
