@@ -1,6 +1,6 @@
 import pandas as pd
-from arch import arch_model
 import numpy as np
+from arch import arch_model
 
 
 def resample_returns(df: pd.DataFrame,
@@ -59,13 +59,18 @@ def calculate_returns(df: pd.DataFrame,
                                       .pct_change()
                                       )
 
-    cols = ['price_date', 'ticker', 'open', 'high', 'low', 'close', 'adjusted_close', 'unadjusted_daily_returns', 'adjusted_daily_returns', 'data_source']
+    cols = ['price_date', 'ticker', 'open', 'high', 'low', 'close',
+            'adjusted_close', 'unadjusted_daily_returns',
+            'adjusted_daily_returns', 'data_source']
     df = df[df['current'] == 1][cols].set_index('price_date')
 
     if periods == 1 and period_type == 'D':
         return df
 
     df = resample_returns(df, periods, period_type)
+    df.rename(columns={
+        'adjusted_120d_returns': 'MMODEL'
+        }, inplace=True)
 
     return df
 
@@ -95,7 +100,9 @@ def calculate_garch(df, p, q, freq, return_column):
         vol_df = pd.DataFrame(res.conditional_volatility)
         vol_df['ticker'] = ticker
         vol_dfs.append(vol_df)
-    vol_df = pd.concat(vol_dfs).reset_index()
+    vol_df = pd.concat(vol_dfs).reset_index().rename(columns={
+        'cond_vol': 'VMODEL'
+        })
     return df.merge(vol_df, on=['price_date', 'ticker'], how='left')
 
 
@@ -119,7 +126,7 @@ def calculate_correlation(df):
             correlations['level_2'] == 'average_adjusted_daily_returns'
             ][cols]
     correlations = correlations.rename(columns={
-        'adjusted_daily_returns': 'correlation'
+        'adjusted_daily_returns': 'CMODEL'
         })
     working_df = working_df.merge(correlations, on=['ticker', 'price_date'])
     return working_df
@@ -155,7 +162,7 @@ def calculate_ATR(df):
     ]
 
     choices = [2, -2]
-    df['signal'] = np.select(conds, choices, default=np.nan)
-    df['signal'] = df.groupby('ticker')['signal'].ffill()
-    df['signal'] = df.groupby('ticker')['signal'].shift(1)
+    df['TMODEL'] = np.select(conds, choices, default=np.nan)
+    df['TMODEL'] = df.groupby('ticker')['TMODEL'].ffill()
     return df
+

@@ -11,7 +11,7 @@ import datetime as dt
 
 
 def get_engine():
-    return create_engine('sqlite:///raw.db', echo=True)
+    return create_engine('sqlite:///raw.db', echo=False)
 
 
 def create_all():
@@ -108,3 +108,5 @@ def etl_dowaward_giordano():
     df = calculate_ATR(df)
 
     return df
+
+
